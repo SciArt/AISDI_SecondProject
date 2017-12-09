@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="aisdi---mini-projekt-asocjacyjne">AISDI - Mini-projekt &quot;asocjacyjne&quot;</h1>
+<h2 id="cel-ćwiczenia">Cel ćwiczenia</h2>
+<p>Zapoznanie się poprzez implementację i testowanie z różnymi strukturami asocjacyjnymi (słownikami).</p>
+<h2 id="zadanie-do-wykonania">Zadanie do wykonania</h2>
+<ol style="list-style-type: decimal">
+<li>Implementacja słownika opartego o drzewo binarne.</li>
+<li>Implementacja słownika opartego o funkcję mieszającą (hashmapa - tablica z kubełkami).</li>
+<li>Porównanie efektywności czasowej tych dwóch kolekcji dla co najmniej dwóch różnych operacji.</li>
+</ol>
+<h2 id="instrukcja">Instrukcja</h2>
+<p>Po skopiowaniu plików projektu, należy uruchomić skrypt <code>create_configs.sh</code> aby powstały pliki projektów Make i CodeBlocks.</p>
+<p>Na przykład:</p>
+<pre><code>  cd KatalogNaProjektyAisdi
+  cp -r /materialy/AISDI/Mapy .
+  cd Mapy
+  ./create_configs.sh</code></pre>
+<h2 id="opis-plików-mini-projektu">Opis plików mini-projektu</h2>
+<p>Katalogi:</p>
+<ul>
+<li>src - katalog zawierający pliki źródłowe klas do zaimplementowania.</li>
+<li>tests - katalog zawierający pliki źródłowe testów jednostkowych.</li>
+<li>Debug - katalog zawierający Makefile'e w trybie Debug i opakowujący je projekt CodeBlocks.</li>
+<li>Release - katalog zawierający Makefile'e w trybie Release i opakowujący je projekt CodeBlocks.</li>
+</ul>
+<p>Pliki źródłowe:</p>
+<ul>
+<li>src/TreeMap.h - wydmuszka implementacji struktury drzewa binarnego.</li>
+<li>src/HashMap.h - wydmuszka implementacji hashmapy.</li>
+<li>src/main.cpp - wydmuszka aplikacji do profilowania wybranych struktur.</li>
+<li>tests/TreeMapTests.cpp - testy jednostkowe klasy TreeMap (można dopisywać nowe).</li>
+<li>tests/HashMapTests.cpp - testy jednostkowe klasy HashMap (można dopisywać nowe).</li>
+<li>tests/test_main.cpp - plik wymagany do stworzenia aplikacji wykonującej testy jednostkowe.</li>
+</ul>
+<h2 id="uwagi">Uwagi</h2>
+<ul>
+<li>Testy nie są testami czarnej-skrzynki, ale testami &quot;od programisty dla programisty&quot;, mającymi pomóc w implementacji. Nie są więc złośliwe, ale jak najbardziej zbliżone do takich, jakie powinny powstać podczas normalnej implementacji. Oznacza to, że można stworzyć kod &quot;złośliwy&quot;, zaliczający testy a jednocześnie nie robiący tego co wymagane. Ale prościej będzie skorzystać z pomocy testów i wykonać poprawnie ćwiczenie - Prowadzący będą oceniać kod.</li>
+<li>Wszystkie pliki wolno modyfikować (np. wykomentowywać część testów na czas implementacji jakiejś funkcji). Nie wskazane jest trwałe usunięcie testów - one wychwytują różne sytuacje graniczne, które zapewne będą drobiazgowo weryfikowane przez Prowadzących.</li>
+<li>Dopisywanie własnych testów jest mile widziane.</li>
+<li>Interfejsy klas TreeMap i HashMap przypominają lekko te z biblioteki standardowej C++, ale tylko w zakresie dotyczącym iteracji (aby ułatwić użycie niektórych operacji dostępnych w <code>std::</code>). Z premedytacją pozostałe operacje mają często inną syntaktykę i semantykę - proszę czytać testy, by zapoznać się z ich oczekiwanym zachowaniem.</li>
+<li>Warto zweryfikować program testujący narzędziem do wykrywania wycieków pamięci (np. <code>valgrind</code>).</li>
+<li>Wycieki pamięci najlepiej wykrywać badając aplikację wykonującą testy jednostkowe. W ten sposób większość operacji będzie zweryfikowana na obecność wycieków.</li>
+<li>Chcąc profilować konkretną operację na kolekcji, warto wykonać ją wielokrotnie dla np. rosnących wielkości kolekcji, żeby zauważyć różnicę.</li>
+<li>Profilowanie ma sens wyłącznie dla kompilacji zoptymalizowanej (<code>Release</code>).</li>
+<li>Domyślny tryb budowania (np. <code>make</code>, <code>make all</code> czy konfiguracja <code>all</code> w CodeBlocks) buduje testy, uruchamia je i tylko gdy one przejdą - buduje aplikację do profilowania.</li>
+<li>Niestety CodeBlocks może mieć problemy z parsowaniem wyjścia z testów - wygodniejsze niż przeglądanie widoku błędów &quot;Build messages&quot; powinno być sprawdzenie zawartości okna &quot;Build Log&quot;.</li>
+<li>Przełączanie się pomiędzy trybami budowania &quot;Debug&quot; i &quot;Release&quot; wymaga otwarcia dwóch instancji CodeBlocks, ale obydwie wykorzystywać będą te same pliki źródłowe.</li>
+</ul>
+</body>
+</html>
