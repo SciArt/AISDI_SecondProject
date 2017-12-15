@@ -30,7 +30,7 @@ public:
     using const_iterator = ConstIterator;
 
 public:
-    HashMap( size_type tableSize = 1000 ) : size_of_table(tableSize), table(nullptr), count(0)
+    HashMap( size_type tableSize = 1000 ) : size_of_table(tableSize), table(nullptr), number_of_elements(0)
     {
         table = new HashNode* [size_of_table];
         for( size_type i = 0; i < size_of_table; ++i )
@@ -48,11 +48,11 @@ public:
         *this = other;
     }
 
-    HashMap( HashMap&& other ) : size_of_table( other.size_of_table ), table(other.table), count(other.count)
+    HashMap( HashMap&& other ) : size_of_table( other.size_of_table ), table(other.table), number_of_elements(other.number_of_elements)
     {
         other.size_of_table = 0;
         other.table = nullptr;
-        other.count = 0;
+        other.number_of_elements = 0;
     }
 
     ~HashMap()
@@ -81,11 +81,11 @@ public:
 
             size_of_table = other.size_of_table;
             table = other.table;
-            count = other.count;
+            number_of_elements = other.number_of_elements;
 
             other.size_of_table = 0;
             other.table = nullptr;
-            other.count = 0;
+            other.number_of_elements = 0;
         }
 
         return *this;
@@ -93,7 +93,7 @@ public:
 
     bool isEmpty() const
     {
-        return (count == 0);
+        return (number_of_elements == 0);
     }
 
     mapped_type& operator[]( const key_type& key )
@@ -104,7 +104,7 @@ public:
         if( node == nullptr )
         {
             node = new HashNode( key, mapped_type() );
-            ++count;
+            ++number_of_elements;
 
             if( table[ hash_key ] == nullptr )
             {
@@ -163,12 +163,12 @@ public:
 
     size_type getSize() const
     {
-        return count;
+        return number_of_elements;
     }
 
     bool operator==(const HashMap& other) const
     {
-        if(count != other.count)
+        if(number_of_elements != other.number_of_elements)
             return false;
 
         for(auto it = begin(), it2 = other.begin() ; it!=end(); ++it, ++it2)
@@ -233,12 +233,12 @@ private:
         ~HashNode() { delete next; }
     };
     HashNode **table;
-    size_type count;
+    size_type number_of_elements;
 
 
     void deleteAll()
     {
-        if( count != 0 )
+        if( number_of_elements != 0 )
         {
             for( size_type i = 0; i < size_of_table; ++i )
             {
@@ -246,7 +246,7 @@ private:
                 table[i] = nullptr;
             }
         }
-        count = 0;
+        number_of_elements = 0;
     }
 
     void remove( HashNode* node, const key_type& key )
@@ -261,7 +261,7 @@ private:
 
         node->next = nullptr;
         delete node;
-        count--;
+        number_of_elements--;
     }
 
     size_type hashFunction( const key_type& key ) const
