@@ -236,7 +236,7 @@ int main(int argc, char** argv)
 
     /// ADDING IN ORDER
 
-    std::cout << "Test#4: adding elements in order, size_of_table == " << size_of_table << " (for HashMap)\n";
+    std::cout << "Test#5: adding elements in order, size_of_table == " << size_of_table << " (for HashMap)\n";
 
     diff = testAddingInOrderHashMap( number_of_elements, size_of_table );
 
